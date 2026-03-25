@@ -8,6 +8,8 @@ const Navbar: React.FC = () => (
       <Link to="/">Home</Link>
       <Link to="/hopitaux">Hôpitaux</Link>
       <Link to="/docteurs">Docteurs</Link>
+      <Link to="/pharmacies">Pharmacies</Link>
+      
     </div>
   </nav>
 );
