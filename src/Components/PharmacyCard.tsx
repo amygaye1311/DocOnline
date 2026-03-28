@@ -1,3 +1,4 @@
+import React from "react";
 import type { Pharmacy } from '../Types/Pharmacy'; 
 
 interface PharmacyCardProps {
