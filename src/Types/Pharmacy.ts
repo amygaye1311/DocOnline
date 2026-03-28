@@ -3,8 +3,12 @@ export interface Pharmacy {
   name: string;
   address: string;
   isOpenLate: boolean;
-  distance: number;
   phone: string;
+  
+  lat: number; 
+  lng: number;
+  
+  distance: number;
 }
 
 export interface Hospital {
@@ -13,6 +17,8 @@ export interface Hospital {
   specialty: string[];
   availableBeds: number;
   urgencyLevel: 'low' | 'medium' | 'high';
+   
+  
 }
 
 export interface Appointment {
