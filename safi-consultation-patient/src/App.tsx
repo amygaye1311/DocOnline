@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Accueil from "./components/Accueil";
-import PatientForm from "./components/PatientForm";
+import Accueil from "./Components/Accueil";
+import PatientForm from "./Components/PatientForm";
 import { Patient } from "./Types/Patient";
-import Consultation from "./Pages/Consultation";
-import PatientList from "./components/PatientList";
-import QRCodePage from "./components/QRCodePage";
-import Footer from "./components/Footer";
+import ConsultationPage from "./Pages/Consultation";
+import PatientList from "./Components/PatientList";
+import QRCodePage from "./Components/QRCodePage";
+import Footer from "./Components/Footer";
 
 
 function App() {
@@ -55,35 +55,12 @@ function App() {
           </div>
         </nav>
 
-        {/* Routes */}
+{/* Routes */}
         <Routes>
-          <Route
-          path="/" element={<Accueil/>}/>
-          <Route
-            path="/"
-            element={
-              <div className="p-6 max-w-3xl mx-auto">
-                <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
-                  Gestion des patients(es)
-                </h1>
-                <div className="bg-white shadow-lg rounded-lg p-6">
-                  <PatientForm onAddPatient={addPatient} />
-              
-                </div>
-                <div className="mt-8 text-center">
-                  <Link
-                    to="/patientList"
-                    className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 text-lg font-semibold shadow-md transition"
-                  >
-                    Voir la liste des patients(es) ({patients.length})
-                  </Link>
-                </div>
-              </div>
-            }
-          />
-          <Route path="/" element={<Accueil/>} />
+          <Route path="/" element={<PatientForm onAddPatient={addPatient} />} />
+          <Route path="/accueil" element={<Accueil />} />
           <Route path="/patientForm" element={<PatientForm onAddPatient={addPatient} />} />
-          <Route path="/consultations" element={<Consultation patients={patients} />} />
+          <Route path="/consultations" element={<ConsultationPage patients={patients} />} />
           <Route path="/patientList" element={<PatientList patients={patients} />} />
           <Route path="/qrcode/:id" element={<QRCodePage patients={patients} />} />
         </Routes>

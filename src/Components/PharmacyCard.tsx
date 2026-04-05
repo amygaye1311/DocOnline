@@ -1,7 +1,5 @@
 
-import React from "react";
 import type { Pharmacy } from "../Types/Pharmacy";
-6
 
 interface PharmacyCardProps {
   pharmacy: Pharmacy;

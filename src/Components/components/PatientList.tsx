@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Patient } from "../Types/Patient";
-import { generateGmailLink } from "../Types/GmailLink";
+import type { Patient } from "../../Types/Patient";
+import { generateGmailLink } from "../../Types/GmailLink";
+
 
 interface Props {
   patients: Patient[];
@@ -10,13 +11,11 @@ interface Props {
 const PatientList: React.FC<Props> = ({ patients }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
 
-  // Filtrage sécurisé (évite le crash si nom ou prenom est undefined)
-  const term = searchTerm.toLowerCase().trim();
-  const filteredPatients = patients.filter((p) => {
-    const nomMatch = p.nom?.toLowerCase().includes(term) ?? false;
-    const prenomMatch = p.prenom?.toLowerCase().includes(term) ?? false;
-    return nomMatch || prenomMatch;
-  });
+  // Filtrage par nom ou prénom
+  const filteredPatients = patients.filter((p) =>
+    p.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    p.prenom.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="max-w-4xl mx-auto mt-8 p-6">
@@ -25,7 +24,6 @@ const PatientList: React.FC<Props> = ({ patients }) => {
         <h2 className="text-2xl font-bold text-green-700 mb-4 text-center">
           Liste des patients(es) ({patients.length})
         </h2>
-
         <div className="max-w-md mx-auto">
           <input
             type="text"
@@ -35,7 +33,6 @@ const PatientList: React.FC<Props> = ({ patients }) => {
             className="w-full p-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
         </div>
-
         {searchTerm && (
           <p className="text-center mt-2 text-sm text-gray-600">
             {filteredPatients.length} résultat(s)
@@ -45,11 +42,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
 
       {/* Liste des patients */}
       {patients.length === 0 ? (
-        <p className="text-gray-500 text-center mt-8">Aucun patient enregistré</p>
-      ) : filteredPatients.length === 0 ? (
-        <p className="text-gray-500 text-center mt-8">
-          Aucun patient ne correspond à votre recherche
-        </p>
+        <p className="text-gray-500 text-center">Aucun patient enregistré</p>
       ) : (
         filteredPatients.map((p) => (
           <div
@@ -70,13 +63,13 @@ const PatientList: React.FC<Props> = ({ patients }) => {
               </div>
               <div>
                 <p className="text-sm text-gray-500 mb-1">
-                  Motif: {p.motifConsultation || "Non renseigné"}
+                  Motif: {p.motifConsultation}
                 </p>
                 <p className="text-sm text-gray-500">
-                  Hôpital: {p.hopital || "Non renseigné"}
+                  Hôpital: {p.hopital}
                 </p>
                 <p className="text-sm text-gray-500">
-                  Spécialiste: {p.specialiste || "Non renseigné"}
+                  Spécialiste: {p.specialiste}
                 </p>
               </div>
             </div>
@@ -94,7 +87,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
                 to={`/qrcode/${p.id}`}
                 className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 text-center font-medium transition"
               >
-                📱 QR Code
+                📱 QR Code 
               </Link>
               <a
                 href={generateGmailLink(p, "medecin@hopital.sn")}
@@ -108,6 +101,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
           </div>
         ))
       )}
+      
     </div>
   );
 };

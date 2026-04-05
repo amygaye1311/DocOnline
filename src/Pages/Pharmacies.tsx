@@ -16,7 +16,7 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 };
 
 const Pharmacies = () => {
-  const { latitude, longitude, error, getLocation } = useGeolocation();
+  const { latitude, longitude, getLocation } = useGeolocation();
   const [searchTerm, setSearchTerm] = useState('');
   const [onlyOpenLate, setOnlyOpenLate] = useState(false);
   const [isLocating, setIsLocating] = useState(false);

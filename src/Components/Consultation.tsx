@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Patient } from "../Types/Patient";
-
+import { useState } from "react";
+import type { Patient } from "../Types/Patient";
 
 interface ConsultationData {
   id: string;
@@ -42,13 +41,11 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
         Page de Consultation
       </h1>
 
-      {/* Formulaire */}
       <div className="max-w-lg mx-auto bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold text-green-600 mb-4">
           Nouvelle consultation
         </h2>
 
-        {/* Patient */}
         <select
           className="w-full border rounded p-2 mb-3"
           value={form.patientId}
@@ -62,7 +59,6 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
           ))}
         </select>
 
-        {/* Date */}
         <input
           type="date"
           className="w-full border rounded p-2 mb-3"
@@ -70,7 +66,6 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
           onChange={(e) => setForm({ ...form, date: e.target.value })}
         />
 
-        {/* Motif */}
         <input
           type="text"
           placeholder="Motif de consultation"
@@ -79,7 +74,6 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
           onChange={(e) => setForm({ ...form, motif: e.target.value })}
         />
 
-        {/* Notes */}
         <textarea
           placeholder="Notes"
           className="w-full border rounded p-2 mb-3"
@@ -87,7 +81,6 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
           onChange={(e) => setForm({ ...form, notes: e.target.value })}
         />
 
-        {/* Orientation hôpital */}
         <select
           className="w-full border rounded p-2 mb-3"
           value={form.hopital}
@@ -103,7 +96,6 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
           <option value="Hôpital de Grand Yoff">Hôpital de Grand Yoff</option>
         </select>
 
-        {/* Spécialiste */}
         <select
           className="w-full border rounded p-2 mb-3"
           value={form.specialiste}
@@ -127,7 +119,6 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
         </button>
       </div>
 
-      {/* Liste */}
       <div className="max-w-lg mx-auto mt-8">
         <h2 className="text-xl font-semibold text-green-600 mb-4 text-center">
           Historique des consultations ({consultations.length})
