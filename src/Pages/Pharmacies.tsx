@@ -81,7 +81,7 @@ const Pharmacies = () => {
       <div className="max-w-5xl mx-auto">
         <header className="mb-10 text-center md:text-left">
           <h1 className="text-4xl font-black text-slate-900 mb-2">
-            Trouver une <span className="text-emerald-600">Pharmacie</span>
+            Trouver une <span className="text-sky-600">Pharmacie</span>()
           </h1>
           <p className="text-slate-500">Service de proximité dynamique DocOnline.</p>
         </header>
@@ -92,7 +92,7 @@ const Pharmacies = () => {
             <input 
               type="text"
               placeholder="Nom ou adresse..."
-              className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-100 border-none focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+              className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-100 border-none focus:ring-2 focus:ring-sky-500 outline-none transition-all"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -102,7 +102,7 @@ const Pharmacies = () => {
             <button 
               onClick={() => setOnlyOpenLate(!onlyOpenLate)}
               className={`flex-1 md:flex-none px-6 py-3 rounded-xl font-bold transition-all ${
-                onlyOpenLate ? 'bg-emerald-600 text-white shadow-lg' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                onlyOpenLate ? 'bg-sky-600 text-white shadow-lg' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
               🌙 {onlyOpenLate ? "Toutes" : "Ouvertes Tard"}

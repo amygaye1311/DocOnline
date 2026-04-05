@@ -14,7 +14,7 @@ const SearchBar: React.FC<{ onSearch: (query: string) => void }> = ({ onSearch }
       />
       <button
         onClick={() => onSearch(query)}
-        className="bg-green-600 text-white px-4 py-1 rounded"
+        className="bg-sky-600 text-white px-4 py-1 rounded"
       >
         🔍
       </button>

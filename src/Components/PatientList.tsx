@@ -18,7 +18,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
   return (
     <div className="max-w-4xl mx-auto mt-8 p-6">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-green-700 mb-4 text-center">
+        <h2 className="text-2xl font-bold text-sky-600 mb-4 text-center">
           Liste des patients(es) ({patients.length})
         </h2>
         <div className="max-w-md mx-auto">
@@ -27,7 +27,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
             placeholder="Rechercher par nom ou prénom..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full p-3 border border-sky-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent"
           />
         </div>
         {searchTerm && (
@@ -43,11 +43,11 @@ const PatientList: React.FC<Props> = ({ patients }) => {
         filteredPatients.map((p) => (
           <div
             key={p.id}
-            className="bg-white p-6 mb-4 rounded-xl shadow-lg hover:shadow-xl transition-all border-l-4 border-green-500"
+            className="bg-white p-6 mb-4 rounded-xl shadow-lg hover:shadow-xl transition-all border-l-4 border-sky-500"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
-                <p className="font-bold text-xl text-green-700 mb-1">
+                <p className="font-bold text-xl text-sky-600 mb-1">
                   {p.nom} {p.prenom}
                 </p>
                 <p className="text-gray-600">
@@ -79,7 +79,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
             <div className="flex gap-2">
               <Link
                 to={`/qrcode/${p.id}`}
-                className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 text-center font-medium transition"
+                className="flex-1 bg-sky-600 text-white py-2 px-4 rounded-lg hover:bg-sky-700 text-center font-medium transition"
               >
                 QR Code
               </Link>
@@ -87,7 +87,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
                 href={generateGmailLink(p, "medecin@hopital.sn")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 text-center font-medium transition"
+                className="flex-1 bg-sky-600 text-white py-2 px-4 rounded-lg hover:bg-sky-700 text-center font-medium transition"
               >
                 Partager via Gmail
               </a>

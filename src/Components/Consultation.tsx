@@ -36,13 +36,13 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
   };
 
   return (
-    <div className="min-h-screen bg-green-50 p-6">
-      <h1 className="text-3xl font-bold text-green-700 text-center mb-6">
+    <div className="min-h-screen bg-sky-50 p-6">
+      <h1 className="text-3xl font-bold text-sky-600 text-center mb-6">
         Page de Consultation
       </h1>
 
       <div className="max-w-lg mx-auto bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-green-600 mb-4">
+        <h2 className="text-xl font-semibold text-sky-600 mb-4">
           Nouvelle consultation
         </h2>
 
@@ -113,14 +113,14 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
 
         <button
           onClick={addConsultation}
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+          className="w-full bg-sky-600 text-white py-2 rounded hover:bg-sky-700 transition"
         >
           Enregistrer
         </button>
       </div>
 
       <div className="max-w-lg mx-auto mt-8">
-        <h2 className="text-xl font-semibold text-green-600 mb-4 text-center">
+        <h2 className="text-xl font-semibold text-sky-600 mb-4 text-center">
           Historique des consultations ({consultations.length})
         </h2>
         {consultations.length === 0 ? (
@@ -131,7 +131,7 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
               key={c.id}
               className="bg-white p-4 mb-3 rounded shadow hover:shadow-lg transition"
             >
-              <p className="font-bold text-green-700">
+              <p className="font-bold text-sky-600">
                 Patient :{" "}
                 {patients.find((p) => p.id === c.patientId)?.nom}{" "}
                 {patients.find((p) => p.id === c.patientId)?.prenom}
@@ -139,7 +139,7 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
               <p>Date : {c.date}</p>
               <p>Motif : {c.motif}</p>
               <p>Notes : {c.notes}</p>
-              <p className="text-green-600 font-semibold">
+              <p className="text-sky-600 font-semibold">
                 Orientation : {c.hopital} — {c.specialiste}
               </p>
             </div>

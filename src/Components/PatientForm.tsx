@@ -63,7 +63,7 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-md max-w-md mx-auto mt-10">
-      <h2 className="text-2xl font-bold text-green-600 text-center mb-4">
+      <h2 className="text-2xl font-bold text-sky-600 text-center mb-4">
         Ajouter un(e) patient(e)
       </h2>
 
@@ -74,7 +74,7 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
           placeholder="Nom"
           value={formData.nom}
           onChange={handleChange}
-          className="border border-green-500 p-2 rounded"
+          className="border border-sky-500 p-2 rounded"
           required
         />
 
@@ -84,7 +84,7 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
           placeholder="Prénom"
           value={formData.prenom}
           onChange={handleChange}
-          className="border border-green-500 p-2 rounded"
+          className="border border-sky-500 p-2 rounded"
           required
         />
 
@@ -94,7 +94,7 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
           placeholder="Âge"
           value={formData.age}
           onChange={handleChange}
-          className="border border-green-500 p-2 rounded"
+          className="border border-sky-500 p-2 rounded"
           required
         />
 
@@ -104,20 +104,20 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
           placeholder="Téléphone"
           value={formData.telephone}
           onChange={handleChange}
-          className="border border-green-500 p-2 rounded"
+          className="border border-sky-500 p-2 rounded"
           required
         />
 
         <button
           type="submit"
-          className="bg-green-600 text-white p-2 rounded hover:bg-green-700"
+          className="bg-sky-600 text-white p-2 rounded hover:bg-sky-700"
         >
           Enregistrer
         </button>
       </form>
 
       {message && (
-        <p className="text-green-700 font-semibold mt-4 text-center">{message}</p>
+        <p className="text-sky-700 font-semibold mt-4 text-center">{message}</p>
       )}
     </div>
   );

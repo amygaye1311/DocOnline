@@ -17,14 +17,14 @@ const PharmacyCard = ({ pharmacy }: PharmacyCardProps) => {
     <div className="group bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="text-xl font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">
+          <h3 className="text-xl font-bold text-slate-800 group-hover:text-sky-600 transition-colors">
             {pharmacy.name}
           </h3>
           <p className="text-xs text-slate-400 mt-1">📍 {pharmacy.address}</p>
         </div>
         
         {pharmacy.isOpenLate && (
-          <span className="bg-emerald-100 text-emerald-700 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase animate-pulse">
+          <span className="bg-sky-100 text-sky-700 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase animate-pulse">
             Ouverte Tard
           </span>
         )}
@@ -43,7 +43,7 @@ const PharmacyCard = ({ pharmacy }: PharmacyCardProps) => {
        
         <a 
           href={`tel:${pharmacy.phone}`}
-          className="flex-1 bg-emerald-50 text-emerald-700 text-center py-2.5 rounded-xl font-bold text-sm hover:bg-emerald-600 hover:text-white transition-all flex items-center justify-center"
+          className="flex-1 bg-sky-50 text-sky-700 text-center py-2.5 rounded-xl font-bold text-sm hover:bg-sky-600 hover:text-white transition-all flex items-center justify-center"
         >
           📞 Appeler
         </a>
