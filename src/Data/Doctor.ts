@@ -14,7 +14,7 @@ export const doctors: Doctor[] = [
   { id: 11, firstName: "DR", lastName: "Ngom", specialty: "Cardiologue", availability: "Mardi - Samedi", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor11" },
   { id: 12, firstName: "DR", lastName: "Fall", specialty: "Pédiatre", availability: "Lundi - Jeudi", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor12" },
   { id: 13, firstName: "DR", lastName: "Sy", specialty: "Dermatologue", availability: "Mercredi - Samedi", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor13" },
-  { id: 14, firstName: "DR", lastName: "Ndour", specialty: "Endocrinologue", availability: "Mardi - Vendredi", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor14" },
-  { id: 15, firstName: "DR", lastName: "Diouf", specialty: "Radiologue", availability: "Lundi - Samedi", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor15" },
-  { id: 16, firstName: "DR", lastName: "Sarr", specialty: "Anesthésiste", availability: "Jeudi - Dimanche", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor16" }
+  { id: 14, firstName: "DR", lastName: "Diouf", specialty: "Radiologue", availability: "Lundi - Samedi", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor15" },
+  { id: 15, firstName: "DR", lastName: "Sarr", specialty: "Anesthésiste", availability: "Jeudi - Dimanche", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor16" },
+  { id: 16, firstName: "DR", lastName: "Ndiaye", specialty: "Ophtalmologue", availability: "Mardi - Vendredi", qrCode: "https://api.qrserver.com/v1/create-qr-code/?data=doctor17" }
 ];

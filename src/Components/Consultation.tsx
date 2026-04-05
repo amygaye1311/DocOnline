@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Patient } from "../Types/Patient";
+import { hopitaux } from "../Data/Hospital";
 
 interface ConsultationData {
   id: string;
@@ -87,13 +88,11 @@ function ConsultationPage({ patients }: { patients: Patient[] }) {
           onChange={(e) => setForm({ ...form, hopital: e.target.value })}
         >
           <option value="">-- Choisir un hôpital --</option>
-          <option value="Hôpital Principal">Hôpital Principal</option>
-          <option value="Hôpital Fann">Hôpital Fann</option>
-          <option value="Hôpital Aristide Le Dantec">Hôpital Aristide Le Dantec</option>
-          <option value="Hôpital Pikine">Hôpital Pikine</option>
-          <option value="Hôpital Dalal Jamm">Hôpital Dalal Jamm</option>
-          <option value="Hôpital Abass Ndao">Hôpital Abass Ndao</option>
-          <option value="Hôpital de Grand Yoff">Hôpital de Grand Yoff</option>
+          {hopitaux.map((hopital) => (
+            <option key={hopital.id} value={hopital.name}>
+              {hopital.name}
+            </option>
+          ))}
         </select>
 
         <select

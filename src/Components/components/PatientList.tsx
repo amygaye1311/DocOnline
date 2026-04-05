@@ -22,7 +22,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
       {/* Titre + barre de recherche */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-green-700 mb-4 text-center">
-          Liste des patients(es) ({patients.length})
+          Liste des patients(es) ayant un rendez-vous ({patients.length})
         </h2>
         <div className="max-w-md mx-auto">
           <input

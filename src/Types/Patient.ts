@@ -4,6 +4,7 @@ export type Patient = {
   prenom: string;
   age: number;
   telephone: string;
+  date: string;
   motifConsultation: string;
   notes: string;
   hopital: string;

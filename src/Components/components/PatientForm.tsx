@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import type { Patient } from "../../Types/Patient";
-import { useNavigate } from "react-router-dom"; // <-- import ajouté
-
+import { hopitaux } from "../../Data/Hospital";
+import { doctors } from "../../Data/Doctor";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   onAddPatient: (patient: Patient) => void;
 };
+
+const specialites = Array.from(new Set(doctors.map((d) => d.specialty)));
 
 const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
   const [formData, setFormData] = useState({
@@ -13,16 +16,17 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
     prenom: "",
     age: "",
     telephone: "",
-    motifConsultation:"",
-    notes:"",
-    hopital:"",
-    specialiste:"",
+    date: "",
+    motifConsultation: "",
+    notes: "",
+    hopital: "",
+    specialiste: "",
   });
 
   const [message, setMessage] = useState(""); // ✅ état pour le message
   const navigate = useNavigate(); // <-- initialisation
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -38,6 +42,7 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
       prenom: formData.prenom,
       age: Number(formData.age),
       telephone: formData.telephone,
+      date: formData.date,
       motifConsultation: formData.motifConsultation,
       notes: formData.notes,
       hopital: formData.hopital,
@@ -56,10 +61,11 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
       prenom: "",
       age: "",
       telephone: "",
-      motifConsultation:"",
-      notes:"",
-      hopital:"",
-      specialiste:"",
+      date: "",
+      motifConsultation: "",
+      notes: "",
+      hopital: "",
+      specialiste: "",
     });
       // attendre 2 secondes avant la redirection
       setTimeout(() => {
@@ -71,7 +77,7 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow-md max-w-md mx-auto mt-10">
       <h2 className="text-2xl font-bold text-green-600 text-center mb-4">
-        Ajouter un(e) patient(e)
+        Prendre rendez-vous
       </h2>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -113,6 +119,63 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
           onChange={handleChange}
           className="border border-green-500 p-2 rounded"
           required
+        />
+
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleChange}
+          className="border border-green-500 p-2 rounded"
+          required
+        />
+
+        <input
+          type="text"
+          name="motifConsultation"
+          placeholder="Motif de consultation"
+          value={formData.motifConsultation}
+          onChange={handleChange}
+          className="border border-green-500 p-2 rounded"
+          required
+        />
+
+        <select
+          name="hopital"
+          value={formData.hopital}
+          onChange={handleChange}
+          className="border border-green-500 p-2 rounded"
+          required
+        >
+          <option value="">-- Choisir un hôpital --</option>
+          {hopitaux.map((hopital) => (
+            <option key={hopital.id} value={hopital.name}>
+              {hopital.name}
+            </option>
+          ))}
+        </select>
+
+        <select
+          name="specialiste"
+          value={formData.specialiste}
+          onChange={handleChange}
+          className="border border-green-500 p-2 rounded"
+          required
+        >
+          <option value="">-- Choisir un spécialiste --</option>
+          {specialites.map((specialite) => (
+            <option key={specialite} value={specialite}>
+              {specialite}
+            </option>
+          ))}
+        </select>
+
+        <textarea
+          name="notes"
+          placeholder="Notes (optionnel)"
+          value={formData.notes}
+          onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+          className="border border-green-500 p-2 rounded h-24"
         />
 
         <button

@@ -19,7 +19,7 @@ const PatientList: React.FC<Props> = ({ patients }) => {
     <div className="max-w-4xl mx-auto mt-8 p-6">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-sky-600 mb-4 text-center">
-          Liste des patients(es) ({patients.length})
+          Liste des patients(es) ayant un rendez-vous ({patients.length})
         </h2>
         <div className="max-w-md mx-auto">
           <input
@@ -55,6 +55,9 @@ const PatientList: React.FC<Props> = ({ patients }) => {
                 </p>
                 <p className="text-gray-600">
                   Tél: <span className="font-semibold">{p.telephone}</span>
+                </p>
+                <p className="text-gray-600">
+                  Date: <span className="font-semibold">{p.date}</span>
                 </p>
               </div>
               <div>

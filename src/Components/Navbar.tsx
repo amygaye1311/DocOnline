@@ -29,8 +29,9 @@ const Navbar: React.FC = () => {
           <NavLink to="/hopitaux" className={linkClass}>Hôpitaux</NavLink>
           <NavLink to="/docteurs" className={linkClass}>Docteurs</NavLink>
           <NavLink to="/pharmacies" className={linkClass}>Pharmacies</NavLink>
-          <NavLink to="/patients" className={linkClass}>Patients</NavLink>
-          <NavLink to="/consultations" className={linkClass}>Consultations</NavLink>
+          <NavLink to="/patients" className={linkClass}>Prendre rendez vous</NavLink>
+          <NavLink to="/patientList" className={linkClass}>Liste des rendez vous</NavLink>
+          <NavLink to="/about" className={linkClass}>À propos</NavLink>
         </div>
       </div>
 
@@ -49,10 +50,13 @@ const Navbar: React.FC = () => {
             Pharmacies
           </NavLink>
           <NavLink to="/patients" className={linkClass} onClick={() => setMobileOpen(false)}>
-            Patients
+            Prendre rendez vous
           </NavLink>
-          <NavLink to="/consultations" className={linkClass} onClick={() => setMobileOpen(false)}>
-            Consultations
+          <NavLink to="/patientList" className={linkClass} onClick={() => setMobileOpen(false)}>
+            Liste des rendez vous
+          </NavLink>
+          <NavLink to="/about" className={linkClass} onClick={() => setMobileOpen(false)}>
+            À propos
           </NavLink>
         </div>
       </div>
