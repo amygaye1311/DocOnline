@@ -48,6 +48,7 @@ function App() {
         <Route path="/patients" element={<PatientForm onAddPatient={addPatient} />} />
         <Route path="/patientList" element={<PatientList patients={patients} />} />
         <Route path="/about" element={<About />} />
+        <Route path="/consultations" element={<PatientList patients={patients} />} />
         <Route path="/qrcode/:id" element={<QRCodePage patients={patients} />} />
       </Routes>
       <Footer />
