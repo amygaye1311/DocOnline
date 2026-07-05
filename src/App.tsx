@@ -24,6 +24,7 @@ function App() {
   useEffect(() => {
     const saved = localStorage.getItem("patients");
     if (saved) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPatients(JSON.parse(saved));
     }
   }, []);
@@ -45,11 +46,11 @@ function App() {
         <Route path="/docteurs" element={<DoctorPage />} />
         <Route path="/hopitaux" element={<HopitalPage />} />
         <Route path="/pharmacies" element={<Pharmacies />} />
-        <Route path="/patients" element={<PatientForm onAddPatient={addPatient} />} />
-        <Route path="/patientList" element={<PatientList patients={patients} />} />
+        <Route path="/patients" element={<PatientForm onAddPatient={() => {}} />} />
+        <Route path="/patientList" element={<PatientList />} />
         <Route path="/about" element={<About />} />
-        <Route path="/consultations" element={<PatientList patients={patients} />} />
-        <Route path="/qrcode/:id" element={<QRCodePage patients={patients} />} />
+        <Route path="/consultations" element={<PatientList />} />
+        <Route path="/qrcode/:id" element={<QRCodePage />} />
       </Routes>
       <Footer />
     </Router>

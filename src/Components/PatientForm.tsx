@@ -3,6 +3,8 @@ import type { Patient } from "../Types/Patient";
 import { hopitaux } from "../Data/Hospital";
 import { doctors } from "../Data/Doctor";
 import { useNavigate } from "react-router-dom";
+import { createRendezVous } from "../api";
+import type { RendezVousBackend } from "../api";
 
 type Props = {
   onAddPatient: (patient: Patient) => void;
@@ -16,11 +18,13 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
     prenom: "",
     age: "",
     telephone: "",
+    email: "",
     date: "",
     motifConsultation: "",
     notes: "",
     hopital: "",
     specialiste: "",
+    heureRendezVous: "",
   });
 
   const [message, setMessage] = useState("");
@@ -33,39 +37,58 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newPatient: Patient = {
-      id: Date.now().toString(),
-      nom: formData.nom,
-      prenom: formData.prenom,
-      age: Number(formData.age),
+    const payload = {
+      nomPatient: formData.nom,
+      prenomPatient: formData.prenom,
       telephone: formData.telephone,
-      date: formData.date,
-      motifConsultation: formData.motifConsultation,
-      notes: formData.notes,
+      email: formData.email || undefined,
+      dateRendezVous: formData.date,
+      heureRendezVous: formData.heureRendezVous || "09:00",
+      motif: formData.motifConsultation,
+      statut: "Planifié",
+      age: Number(formData.age) || 0,
       hopital: formData.hopital,
       specialiste: formData.specialiste,
+      notes: formData.notes,
     };
 
-    onAddPatient(newPatient);
-    setMessage("Patient enregistré avec succès ✅");
-
-    setFormData({
-      nom: "",
-      prenom: "",
-      age: "",
-      telephone: "",
-      date: "",
-      motifConsultation: "",
-      notes: "",
-      hopital: "",
-      specialiste: "",
-    });
-    setTimeout(() => {
-      navigate("/consultations");
-    }, 2000);
+    try {
+      const created: RendezVousBackend = await createRendezVous(payload);
+      onAddPatient({
+        id: String(created.id),
+        nom: created.nomPatient,
+        prenom: created.prenomPatient,
+        age: created.age,
+        telephone: created.telephone,
+        date: created.dateRendezVous,
+        motifConsultation: created.motif,
+        notes: created.notes,
+        hopital: created.hopital,
+        specialiste: created.specialiste,
+      });
+      setMessage("Patient enregistré avec succès ✅");
+      setFormData({
+        nom: "",
+        prenom: "",
+        age: "",
+        telephone: "",
+        email: "",
+        date: "",
+        motifConsultation: "",
+        notes: "",
+        hopital: "",
+        specialiste: "",
+        heureRendezVous: "",
+      });
+      setTimeout(() => {
+        navigate("/consultations");
+      }, 2000);
+    } catch {
+      setMessage("Erreur lors de l'enregistrement.");
+    }
   };
 
   return (
@@ -116,6 +139,15 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
         />
 
         <input
+          type="email"
+          name="email"
+          placeholder="Email (optionnel)"
+          value={formData.email}
+          onChange={handleChange}
+          className="border border-sky-500 p-2 rounded"
+        />
+
+        <input
           type="date"
           name="date"
           placeholder="Date de consultation"
@@ -123,6 +155,15 @@ const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
           onChange={handleChange}
           className="border border-sky-500 p-2 rounded"
           required
+        />
+
+        <input
+          type="time"
+          name="heureRendezVous"
+          placeholder="Heure"
+          value={formData.heureRendezVous}
+          onChange={handleChange}
+          className="border border-sky-500 p-2 rounded"
         />
 
         <input

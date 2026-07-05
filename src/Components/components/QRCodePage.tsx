@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import type { Patient } from "../../Types/Patient";
 import PatientQRCode from "./PatientQRCode";
+import { getRendezVous } from "../../api";
 
-
-interface Props {
-  patients: Patient[];
-}
-
-const QRCodePage: React.FC<Props> = ({ patients }) => { 
+const QRCodePage: React.FC = () => { 
   const { id } = useParams<{ id: string }>();
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getRendezVous()
+      .then(setPatients)
+      .catch(() => setPatients([]))
+      .finally(() => setLoading(false));
+  }, []);
+
   const patient = patients.find((p) => p.id === id);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <p className="text-xl text-gray-600">Chargement...</p>
+      </div>
+    );
+  }
 
   if (!patient) {
     return (

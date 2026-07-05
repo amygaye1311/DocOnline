@@ -2,7 +2,15 @@ export interface Doctor {
   id: number;
   firstName: string;
   lastName: string;
-  specialty: string;
-  availability: string;
-  qrCode: string; // URL ou base64
+  speciality: string;
+  phone: string;
+  email: string;
+  hospital: {
+    id: number;
+    name: string;
+    address: string;
+    city: string;
+    country: string;
+    phone: string;
+  };
 }

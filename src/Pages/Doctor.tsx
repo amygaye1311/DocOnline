@@ -1,19 +1,47 @@
-import React, { useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import CardContainer from "../Components/CardContainer";
+import { getDoctors } from "../api";
+import type { Doctor } from "../Types/Doctor";
 import DoctorCard from "../Components/DoctorCard";
-import { doctors } from "../Data/Doctor";
+import CardContainer from "../Components/CardContainer";
 
 const DoctorPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const specialtyFilter = searchParams.get("specialty");
+
+  useEffect(() => {
+    getDoctors()
+      .then(setDoctors)
+      .catch(() => setError("Impossible de charger les docteurs."))
+      .finally(() => setLoading(false));
+  }, []);
 
   const filteredDoctors = useMemo(() => {
     if (!specialtyFilter) return doctors;
-    return doctors.filter((d) => 
-      d.specialty.toLowerCase() === specialtyFilter.toLowerCase()
+    return doctors.filter((d) =>
+      d.speciality.toLowerCase() === specialtyFilter.toLowerCase()
     );
-  }, [specialtyFilter]);
+  }, [doctors, specialtyFilter]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-500">Chargement...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

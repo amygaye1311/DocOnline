@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../assets/image.png";
 import { doctors } from "../Data/Doctor";
+import { getWeather } from "../api";
+import type { Weather } from "../Types/Weather";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -9,6 +11,33 @@ const Home: React.FC = () => {
     { from: "assistant", text: "Bonjour ! Je suis votre assistant virtuel. En quoi puis-je vous aider aujourd'hui ?" },
   ]);
   const [assistantInput, setAssistantInput] = useState("");
+  const [city, setCity] = useState("Dakar");
+  const [weather, setWeather] = useState<Weather | null>(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [weatherError, setWeatherError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getWeather(city)
+      .then(setWeather)
+      .catch(() => setWeatherError("Impossible de récupérer la météo."))
+      .finally(() => setWeatherLoading(false));
+  }, []);
+
+  const handleWeatherSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!city.trim()) return;
+    setWeatherLoading(true);
+    setWeatherError(null);
+    try {
+      const data = await getWeather(city);
+      setWeather(data);
+    } catch {
+      setWeatherError("Impossible de récupérer la météo pour cette ville.");
+      setWeather(null);
+    } finally {
+      setWeatherLoading(false);
+    }
+  };
 
   const getAssistantReply = (message: string) => {
     const normalized = message.toLowerCase();
@@ -109,13 +138,55 @@ const Home: React.FC = () => {
         </div>
       </div>
 
+      {/* Weather Widget */}
+      <div className="px-8 py-10 max-w-6xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">🌤️ Météo</h2>
+          <form onSubmit={handleWeatherSearch} className="flex gap-3 mb-4">
+            <input
+              type="text"
+              placeholder="Ville..."
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="flex-1 px-4 py-3 rounded-xl bg-slate-100 border-none focus:ring-2 focus:ring-sky-500 outline-none"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 rounded-xl font-bold bg-sky-600 text-white shadow-lg hover:bg-sky-700 transition-all"
+            >
+              Rechercher
+            </button>
+          </form>
+
+          {weatherError && (
+            <div className="p-4 bg-red-100 text-red-700 rounded-xl mb-4">
+              ❌ {weatherError}
+            </div>
+          )}
+
+          {weatherLoading && (
+            <div className="p-4 bg-slate-100 text-slate-600 rounded-xl">
+              Chargement de la météo...
+            </div>
+          )}
+
+          {weather && !weatherLoading && (
+            <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200 text-center">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">{weather.city}</h3>
+              <p className="text-sky-600 text-xl mb-2">{weather.temperature}°C</p>
+              <p className="text-slate-500">{weather.description}</p>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Specialties Section */}
       <div className="px-8 py-12 max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-800 mb-1">
           <span className="text-sky-600">SPECIALISTES</span>
         </h2>
         <div className="w-16 h-1 bg-sky-600 mb-8"></div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           {specialites.map((spec, index) => (
             <div
@@ -123,8 +194,8 @@ const Home: React.FC = () => {
               onClick={() => navigate(`/docteurs?specialty=${spec.specialty}`)}
               className="bg-sky-50 rounded-lg p-4 flex flex-col items-center hover:bg-sky-100 transition cursor-pointer border border-sky-100"
             >
-              <img 
-                src={spec.image} 
+              <img
+                src={spec.image}
                 alt={spec.name}
                 className="w-16 h-16 rounded-full object-cover mb-2"
               />
@@ -143,7 +214,7 @@ const Home: React.FC = () => {
               Découvrez notre liste complète de spécialistes
             </p>
           </div>
-          <button 
+          <button
             onClick={() => navigate("/docteurs")}
             className="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition font-medium"
           >
