@@ -43,15 +43,15 @@ const Home: React.FC = () => {
     const normalized = message.toLowerCase();
 
     const matchedDoctors = doctors.filter((doctor) =>
-      normalized.includes(doctor.specialty.toLowerCase()) ||
-      normalized.includes(doctor.specialty.toLowerCase().replace(/é/g, "e")) ||
-      normalized.includes(doctor.specialty.toLowerCase().replace(/ê/g, "e")) ||
-      normalized.includes(doctor.specialty.toLowerCase().replace(/é/g, "e").replace(/ê/g, "e"))
+      normalized.includes(doctor.speciality.toLowerCase()) ||
+      normalized.includes(doctor.speciality.toLowerCase().replace(/é/g, "e")) ||
+      normalized.includes(doctor.speciality.toLowerCase().replace(/ê/g, "e")) ||
+      normalized.includes(doctor.speciality.toLowerCase().replace(/é/g, "e").replace(/ê/g, "e"))
     );
 
     if (matchedDoctors.length > 0) {
       const names = matchedDoctors.slice(0, 2).map((doctor) => `${doctor.firstName} ${doctor.lastName}`).join(" et ");
-      return `Voici un médecin correspondant à votre demande : ${names} (${matchedDoctors[0].specialty}). Vous pouvez consulter la page des docteurs pour en voir plus.`;
+      return `Voici un médecin correspondant à votre demande : ${names} (${matchedDoctors[0].speciality}). Vous pouvez consulter la page des docteurs pour en voir plus.`;
     }
 
     if (normalized.includes("rendez") || normalized.includes("rdv")) {

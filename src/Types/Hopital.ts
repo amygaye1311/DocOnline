@@ -8,4 +8,6 @@ export interface Hopital {
   country: string;
   phone: string;
   doctors: Doctor[];
+  specialties?: string[];
+  location?: string;
 }

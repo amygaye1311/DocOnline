@@ -8,7 +8,7 @@ type Props = {
   onAddPatient: (patient: Patient) => void;
 };
 
-const specialites = Array.from(new Set(doctors.map((d) => d.specialty)));
+const specialites = Array.from(new Set(doctors.map((d) => d.speciality)));
 
 const PatientForm: React.FC<Props> = ({ onAddPatient }) => {
   const [formData, setFormData] = useState({

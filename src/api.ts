@@ -3,7 +3,6 @@ import type { Doctor } from "./Types/Doctor";
 import type { Hopital } from "./Types/Hopital";
 import type { Pharmacy } from "./Types/Pharmacy";
 import type { Weather } from "./Types/Weather";
-import type { Patient } from "./Types/Patient";
 
 const API_URL = "/api";
 

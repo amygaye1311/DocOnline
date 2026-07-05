@@ -3,9 +3,10 @@ export interface Doctor {
   firstName: string;
   lastName: string;
   speciality: string;
+  specialty?: string;
   phone: string;
   email: string;
-  hospital: {
+  hospital?: {
     id: number;
     name: string;
     address: string;
@@ -13,4 +14,6 @@ export interface Doctor {
     country: string;
     phone: string;
   };
+  availability?: string;
+  qrCode?: string;
 }

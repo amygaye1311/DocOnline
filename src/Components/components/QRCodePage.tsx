@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import type { Patient } from "../../Types/Patient";
 import PatientQRCode from "./PatientQRCode";
 import { getRendezVous } from "../../api";
+import type { RendezVousBackend } from "../../api";
+import type { Patient } from "../../Types/Patient";
+
+const toPatient = (r: RendezVousBackend): Patient => ({
+  id: String(r.id),
+  nom: r.nomPatient,
+  prenom: r.prenomPatient,
+  age: r.age,
+  telephone: r.telephone,
+  date: r.dateRendezVous,
+  motifConsultation: r.motif,
+  notes: r.notes,
+  hopital: r.hopital,
+  specialiste: r.specialiste,
+});
 
 const QRCodePage: React.FC = () => { 
   const { id } = useParams<{ id: string }>();
-  const [patients, setPatients] = useState<Patient[]>([]);
+  const [rendezVous, setRendezVous] = useState<RendezVousBackend[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getRendezVous()
-      .then(setPatients)
-      .catch(() => setPatients([]))
+      .then(setRendezVous)
+      .catch(() => setRendezVous([]))
       .finally(() => setLoading(false));
   }, []);
 
-  const patient = patients.find((p) => p.id === id);
+  const rdv = rendezVous.find((r) => r.id === Number(id));
+  const patient: Patient | undefined = rdv ? toPatient(rdv) : undefined;
 
   if (loading) {
     return (
